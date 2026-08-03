@@ -1,11 +1,14 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, Image, TextInput, View, Pressable  } from "react-native";
+import { Text, Image, TextInput, View, Pressable, ScrollView  } from "react-native";
 import React from 'react'
+import { FontAwesome , Ionicons } from "@expo/vector-icons";
+
 
 
 
 const Login = () => {
   return (
+     <ScrollView>
       <SafeAreaView >
       <Text  className=" text-[#0058BE] text-4xl   text-center pt-4 font-anybody-bolditalic ">COMIC CLOUD</Text>
       <Image
@@ -36,9 +39,13 @@ const Login = () => {
     onPress={() => console.log("Login")}
     className="bg-[#0058BE] left-5 w-[88%] h-14 justify-center items-center border-2 border-black"
   >
-    <Text className="text-white text-3xl font-anybody-bolditalic">
-      LOGIN
-    </Text>
+    <View className="flex-row gap-3">
+      <Text className="text-white text-3xl font-anybody-bolditalic">
+        LOGIN
+      </Text>
+      <Ionicons name="arrow-forward" size={30} color="white" />
+    </View>
+    
   </Pressable>
     </View>
 
@@ -47,10 +54,35 @@ const Login = () => {
       <Text className="mx-3 font-mono">OR CONTINUE WITH</Text>
       <View className="h-[3px] bg-gray-400 flex-1" />
     </View>
-        
+
+
+
+  
+    
+    <View className=" mt-6">
+      <View className="absolute top-2 left-7 w-[88%] h-14 bg-[#090909]" />
+
+        <Pressable
+          onPress={() => console.log("google")}
+          className="bg-[#ffffff] left-5 w-[88%] h-14 justify-center items-center border-2 border-black"
+        >
+        <View className="flex-row gap-4">
+        <FontAwesome name="google" size={30} color="black" />
+        <Text className="text-balck text-3xl font-mono-bold">GOOGLE</Text>
+        </View>
+        </Pressable>
+    </View>
+    
+
+    <View>
+      <Text className="mt-8 text-center font-mono text-lg">Don&apos;t have an account? <Text className="text-[#0058BE] font-anybody-bolditalic text-xl">Sign Up</Text></Text>
+    </View>
+    
+    
+    
 
     </SafeAreaView>
-    
+    </ScrollView>
   )
 }
 
