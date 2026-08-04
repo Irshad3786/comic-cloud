@@ -1,7 +1,7 @@
 import './global.css';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Login from "./screens/Login";
 import { useFonts } from "expo-font";
+import Dashboard from './screens/Dashboard';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -20,7 +20,7 @@ export default function App() {
   }
   return (
     <SafeAreaProvider >
-       <Login/>
+      <Dashboard/>
     </SafeAreaProvider>
   );
 }
