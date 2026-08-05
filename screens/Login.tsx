@@ -6,7 +6,7 @@ import { FontAwesome , Ionicons } from "@expo/vector-icons";
 
 
 
-const Login = () => {
+const Login = ({ navigation }:{navigation:any}) => {
   return (
      <ScrollView>
       <SafeAreaView >
@@ -36,7 +36,7 @@ const Login = () => {
   <View className="absolute top-2 left-7 w-[88%] h-14 bg-[#003f8c]" />
 
   <Pressable
-    onPress={() => console.log("Login")}
+    onPress={() => navigation.navigate('Dashboard')}
     className="bg-[#0058BE] left-5 w-[88%] h-14 justify-center items-center border-2 border-black"
   >
     <View className="flex-row gap-3">

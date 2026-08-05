@@ -1,10 +1,8 @@
 import React from "react";
 import { View, Text, Pressable, ScrollView, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  Ionicons,
-  Feather,
-} from "@expo/vector-icons";
+import { Ionicons, Feather } from "@expo/vector-icons";
+import BottomBar from "../components/BottomBar";
 
 const stories = [
   {
@@ -22,25 +20,6 @@ const stories = [
   {
     title: "Mystery",
     image: require("../assets/images/mystre.png"),
-  },
-];
-
-const bottomItems = [
-  {
-    id: "stories",
-    icon: (color: string) => <Ionicons name="book-outline" size={24} color={color} />,
-  },
-  {
-    id: "notifications",
-    icon: (color: string) => <Ionicons name="notifications-outline" size={24} color={color} />,
-  },
-  {
-    id: "profile",
-    icon: (color: string) => <Ionicons name="person-outline" size={24} color={color} />,
-  },
-  {
-    id: "posted",
-    icon: (color: string) => <Feather name="upload-cloud" size={24} color={color} />,
   },
 ];
 
@@ -80,19 +59,27 @@ const feedPosts = [
   },
 ];
 
-const Dashboard = () => {
+const Dashboard = ({ navigation }: { navigation: any }) => {
   return (
     <SafeAreaView className="flex-1 bg-[#f5f3ee]">
       <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
         <View className="px-4 pt-2">
           <View className="flex-row items-center justify-between">
-            <View>
-              <Text className="text-[#0058BE] text-4xl font-anybody-bolditalic">
-                COMIC CLOUD
-              </Text>
-              <Text className="text-[#0c0c0c] mt-1 font-mono text-sm">
-                Discover, create, and post your comic stories.
-              </Text>
+            <View className="flex-row items-center gap-3">
+              <View className="h-14 w-14 items-center justify-center rounded-[20px] border-2 border-black bg-[#0058BE] shadow-lg">
+                <View className="absolute inset-2 rounded-[14px] bg-[#003f8c]" />
+                <View className="relative h-8 w-8 items-center justify-center rounded-full bg-white">
+                  <Feather name="cloud" size={20} color="#0058BE" />
+                </View>
+              </View>
+              <View>
+                <Text className="text-[#0058BE] text-3xl font-anybody-bolditalic">
+                  Comic Cloud
+                </Text>
+                <Text className="text-[#0c0c0c] mt-1 font-mono text-xs">
+                  Discover, create, and post your comic stories.
+                </Text>
+              </View>
             </View>
           </View>
 
@@ -204,30 +191,7 @@ const Dashboard = () => {
         </View>
       </ScrollView>
 
-      <View className="absolute bottom-0 left-0 right-0 px-4 pb-3">
-        <View className="rounded-[32px] border-2 border-black bg-white px-4 py-3 shadow-xl">
-          <View className="flex-row items-center justify-between">
-            {bottomItems.slice(0, 2).map((item) => (
-              <Pressable key={item.id} className="h-14 flex-1 items-center justify-center">
-                {item.icon("#111827")}
-              </Pressable>
-            ))}
-
-            <Pressable className="h-16 w-16 items-center justify-center rounded-full border-2 border-black bg-[#0058BE] shadow-lg">
-              <View className="absolute top-2 left-2 right-2 bottom-2 rounded-full bg-[#003f8c]" />
-              <View className="relative h-12 w-12 items-center justify-center rounded-full bg-[#0058BE]">
-                <Ionicons name="add" size={30} color="white" />
-              </View>
-            </Pressable>
-
-            {bottomItems.slice(2).map((item) => (
-              <Pressable key={item.id} className="h-14 flex-1 items-center justify-center">
-                {item.icon("#111827")}
-              </Pressable>
-            ))}
-          </View>
-        </View>
-      </View>
+      <BottomBar navigation={navigation} activeRoute="Dashboard" />
     </SafeAreaView>
   );
 };

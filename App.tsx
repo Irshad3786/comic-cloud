@@ -2,6 +2,15 @@ import './global.css';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from "expo-font";
 import Dashboard from './screens/Dashboard';
+import Login from './screens/Login';
+import CreateUserId from './screens/CreateUserId';
+import CreateAccount from './screens/CreateAccount';
+import Notification from './screens/Notification';
+import UploadPost from './screens/UploadPost';
+import Settings from './screens/Profile';
+
+import {NavigationContainer} from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -15,12 +24,33 @@ export default function App() {
      JetBrainsMonoItalic:require("./assets/fonts/JetBrainsMono-Italic.ttf"),
   });
 
+  const Stack = createNativeStackNavigator();
+
+
   if (!loaded) {
     return null;
   }
   return (
-    <SafeAreaProvider >
-      <Dashboard/>
+     <SafeAreaProvider >
+     <NavigationContainer>
+      <Stack.Navigator
+         initialRouteName="Login"
+         screenOptions={{
+        headerShown: false,
+        animation:"none"
+       
+      }}
+      >
+   
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="CreateAccount" component={CreateAccount} />
+        <Stack.Screen name="CreateUserId" component={CreateUserId} />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="Notification" component={Notification} />
+        <Stack.Screen name="Profile" component={UploadPost} />
+        <Stack.Screen name="Settings" component={Settings} />
+    </Stack.Navigator>
+    </NavigationContainer>
     </SafeAreaProvider>
   );
 }
