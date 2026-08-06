@@ -8,6 +8,7 @@ import CreateAccount from './screens/CreateAccount';
 import Notification from './screens/Notification';
 import UploadPost from './screens/UploadPost';
 import Settings from './screens/Profile';
+import CreatePost from './screens/CreatePost';
 
 import {NavigationContainer} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -47,6 +48,7 @@ export default function App() {
         <Stack.Screen name="CreateUserId" component={CreateUserId} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="Notification" component={Notification} />
+        <Stack.Screen name="CreatePost" component={CreatePost} />
         <Stack.Screen name="Profile" component={UploadPost} />
         <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>

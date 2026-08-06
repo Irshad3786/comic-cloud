@@ -2,7 +2,7 @@ import React from "react";
 import { View, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-type ActiveRoute = "Dashboard" | "Notification" | "Profile" | "Settings";
+type ActiveRoute = "Dashboard" | "Notification" | "CreatePost" | "Profile" | "Settings";
 
 type BottomBarProps = {
   navigation: any;
@@ -22,9 +22,9 @@ const BottomBar = ({ navigation, activeRoute }: BottomBarProps) => {
             <Ionicons name="notifications-outline" size={24} color={activeRoute === "Notification" ? "#0058BE" : "#111827"} />
           </Pressable>
 
-          <Pressable onPress={() => navigation.navigate("Profile")} className="h-16 w-16 items-center justify-center rounded-full border-2 border-black bg-[#0058BE] shadow-lg">
+          <Pressable onPress={() => navigation.navigate("CreatePost")} className="h-16 w-16 items-center justify-center rounded-full border-2 border-black bg-[#0058BE] shadow-lg">
             <View className="absolute top-2 left-2 right-2 bottom-2 rounded-full bg-[#003f8c]" />
-            <View className="relative h-12 w-12 items-center justify-center rounded-full bg-[#0058BE]">
+            <View className={`relative h-12 w-12 items-center justify-center rounded-full ${activeRoute === "CreatePost" ? "bg-[#002f6a]" : "bg-[#0058BE]"}`}>
               <Ionicons name="add" size={30} color="white" />
             </View>
           </Pressable>
