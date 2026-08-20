@@ -75,7 +75,15 @@ const Login = ({ navigation }:{navigation:any}) => {
     
 
     <View>
-      <Text className="mt-8 text-center font-mono text-lg">Don&apos;t have an account? <Text className="text-[#0058BE] font-anybody-bolditalic text-xl">Sign Up</Text></Text>
+      <Text className="mt-8 text-center font-mono text-lg">
+        Don&apos;t have an account?{" "}
+        <Text
+          onPress={() => navigation.navigate('CreateAccount')}
+          className="text-[#0058BE] font-anybody-bolditalic text-xl"
+        >
+          Sign Up
+        </Text>
+      </Text>
     </View>
     
     
