@@ -48,7 +48,7 @@ const CreateAccount = ({ navigation }: { navigation: any }) => {
 
     setLoading(true);
     try {
-      await api.createAccount({
+      const response = await api.createAccount({
         email: formData.email.toLowerCase().trim(),
         password: formData.password,
         name: formData.name.trim(),
@@ -56,11 +56,14 @@ const CreateAccount = ({ navigation }: { navigation: any }) => {
 
       Alert.alert(
         'Success!',
-        'Account created successfully',
+        'Account created successfully. Please verify your email.',
         [
           {
             text: 'OK',
-            onPress: () => navigation.navigate('CreateUserId'),
+            onPress: () => navigation.navigate('VerifyEmail', {
+              userId: response.user.id,
+              email: response.user.email,
+            }),
           },
         ]
       );

@@ -5,6 +5,7 @@ import Dashboard from './screens/Dashboard';
 import Login from './screens/Login';
 import CreateUserId from './screens/CreateUserId';
 import CreateAccount from './screens/CreateAccount';
+import VerifyEmail from './screens/VerifyEmail';
 import Notification from './screens/Notification';
 import UploadPost from './screens/UploadPost';
 import Settings from './screens/Profile';
@@ -39,12 +40,13 @@ export default function App() {
          screenOptions={{
         headerShown: false,
         animation:"none"
-       
+
       }}
       >
-   
+
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="CreateAccount" component={CreateAccount} />
+        <Stack.Screen name="VerifyEmail" component={VerifyEmail} />
         <Stack.Screen name="CreateUserId" component={CreateUserId} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="Notification" component={Notification} />

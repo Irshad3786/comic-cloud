@@ -21,7 +21,43 @@ export interface CreateAccountResponse {
     email: string;
     name?: string;
     createdAt: string;
+    status: string;
   };
+}
+
+export interface VerifyCodeRequest {
+  code: string;
+}
+
+export interface VerifyCodeResponse {
+  message: string;
+  user: {
+    id: string;
+    email: string;
+    name?: string;
+    status: string;
+    emailVerifiedAt: string;
+  };
+}
+
+export interface CreateUserIdRequest {
+  userId: string;
+}
+
+export interface CreateUserIdResponse {
+  message: string;
+  user: {
+    id: string;
+    email: string;
+    userId: string;
+    name?: string;
+    status: string;
+  };
+}
+
+export interface CheckUserIdAvailabilityResponse {
+  available: boolean;
+  userId: string;
 }
 
 export interface ApiError {
@@ -65,6 +101,108 @@ class ApiService {
 
     if (!response.ok) {
       throw new Error(result.error || 'Failed to fetch user');
+    }
+
+    return result;
+  }
+
+  /**
+   * Send verification code to user's email
+   */
+  async sendVerificationCode(userId: string): Promise<{ message: string }> {
+    const response = await fetch(`${this.baseUrl}/users/${userId}/verify-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to send verification code');
+    }
+
+    return result;
+  }
+
+  /**
+   * Verify the email verification code
+   */
+  async verifyCode(userId: string, code: string): Promise<VerifyCodeResponse> {
+    const response = await fetch(`${this.baseUrl}/users/${userId}/verify-code`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ code }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to verify code');
+    }
+
+    return result;
+  }
+
+  /**
+   * Resend verification code
+   */
+  async resendVerificationCode(userId: string): Promise<{ message: string }> {
+    const response = await fetch(`${this.baseUrl}/users/${userId}/resend-code`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to resend verification code');
+    }
+
+    return result;
+  }
+
+  /**
+   * Check if a user ID (username) is available
+   */
+  async checkUserIdAvailability(userId: string): Promise<CheckUserIdAvailabilityResponse> {
+    const response = await fetch(`${this.baseUrl}/users/check-userid/${encodeURIComponent(userId)}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to check user ID availability');
+    }
+
+    return result;
+  }
+
+  /**
+   * Create/set user ID (username) after email verification
+   */
+  async createUserId(userId: string, userIdValue: string): Promise<CreateUserIdResponse> {
+    const response = await fetch(`${this.baseUrl}/users/${userId}/create-userid`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: userIdValue }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to create user ID');
     }
 
     return result;
