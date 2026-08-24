@@ -60,6 +60,22 @@ export interface CheckUserIdAvailabilityResponse {
   userId: string;
 }
 
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  message: string;
+  user: {
+    id: string;
+    email: string;
+    userId?: string;
+    name?: string;
+    status: string;
+  };
+}
+
 export interface ApiError {
   error: string;
 }
@@ -69,6 +85,24 @@ class ApiService {
 
   constructor(baseUrl: string = API_BASE_URL) {
     this.baseUrl = baseUrl;
+  }
+
+  async login(data: LoginRequest): Promise<LoginResponse> {
+    const response = await fetch(`${this.baseUrl}/users/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Login failed');
+    }
+
+    return result;
   }
 
   async createAccount(data: CreateAccountRequest): Promise<CreateAccountResponse> {
